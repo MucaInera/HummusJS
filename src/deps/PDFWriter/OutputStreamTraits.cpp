@@ -40,7 +40,11 @@ EStatusCode OutputStreamTraits::CopyToOutputStream(IByteReader* inInputStream)
 	LongBufferSizeType readBytes,writeBytes;
 	EStatusCode status = PDFHummus::eSuccess;
 
-	while(inInputStream->NotEnded() && PDFHummus::eSuccess == status)
+	if (!inInputStream) {
+		status = PDFHummus::eFailure;
+	}
+
+	while(PDFHummus::eSuccess == status && inInputStream->NotEnded())
 	{
 		readBytes = inInputStream->Read(buffer,TENMEGS);
 		writeBytes = mOutputStream->Write(buffer,readBytes);
