@@ -24,7 +24,9 @@
 #  include <string.h>
 #  include <stdlib.h>
 #  include <limits.h>
-#  include <unistd.h>
+#  ifndef _WIN32_
+#     include <unistd.h>
+#  endif
 #endif
 
 #ifndef _POSIX_SOURCE
